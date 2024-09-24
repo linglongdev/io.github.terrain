@@ -1,0 +1,28 @@
+version: "1"
+
+package:
+  id: io.github.terrain
+  name: terrain
+  version: 0.0.0.2
+  kind: app
+  description: |
+    combines Perlin noise, fractional Brownian motion and a hydraulic erosion mode
+
+command:
+  - /opt/apps/io.github.terrain/files/bin/terrain
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/sasha-agafonov/hydraulic-erosion.git
+    version: master
+    commit: c3da8f60e12ba7181662daf651cbd03ebb867680
+
+build: |
+  cd /project/linglong/sources/hydraulic-erosion.git
+  git apply ../../../0001-install.patch
+  qmake -makefile PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make -j$(nproc)
+  make install
