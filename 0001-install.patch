@@ -1,0 +1,52 @@
+From 99ce220fff2f31ee1c4c1f702e696f1cff7b00b4 Mon Sep 17 00:00:00 2001
+From: wjyrich <1071633242@qq.com>
+Date: Tue, 17 Sep 2024 16:58:32 +0800
+Subject: [PATCH] install
+
+---
+ terrain.desktop | 11 +++++++++++
+ terrain.pro     | 11 +++++++----
+ 2 files changed, 18 insertions(+), 4 deletions(-)
+ create mode 100644 terrain.desktop
+
+diff --git a/terrain.desktop b/terrain.desktop
+new file mode 100644
+index 0000000..5581dca
+--- /dev/null
++++ b/terrain.desktop
+@@ -0,0 +1,11 @@
++[Desktop Entry]
++Categories=Accessibility;Qt;Utility;
++Exec=terrain
++Name=terrain
++Name[zh_CN]=terrain
++Icon=cuarrow
++StartupNotify=false
++Terminal=false
++Type=Application
++GenericName=terrain
++Version=1.0
+\ No newline at end of file
+diff --git a/terrain.pro b/terrain.pro
+index 9fd73c8..913b94f 100644
+--- a/terrain.pro
++++ b/terrain.pro
+@@ -61,7 +61,10 @@ HEADERS += \
+ 
+ FORMS += \
+ 
+-# Default rules for deployment.
+-qnx: target.path = /tmp/$${TARGET}/bin
+-else: unix:!android: target.path = /opt/$${TARGET}/bin
+-!isEmpty(target.path): INSTALLS += target
++target.path = $$PREFIX/bin
++desktop.files = terrain.desktop
++desktop.path = $$PREFIX/share/applications/
++icons.path = $$PREFIX/share/icons/hicolor/apps/
++icons.files = cuarrow.png
++
++INSTALLS += target desktop icons
+\ No newline at end of file
+-- 
+2.43.4
+
